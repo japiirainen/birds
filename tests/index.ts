@@ -1,4 +1,4 @@
-import { idiot, kestrel, cardinal, applicator } from '../src'
+import { idiot, kestrel, cardinal, applicator, psi } from '../src'
 import * as fc from 'fast-check'
 
 describe('birds', () => {
@@ -25,6 +25,15 @@ describe('birds', () => {
       fc.property(fc.nat(), (a) => {
         const f = (b: number) => `${b}`
         expect(applicator(f)(a)).toBe(f(a))
+      })
+    ))
+
+  it('applicator bird', () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), (a, b) => {
+        const f = (a: number) => (b: number) => a + b
+        const g = (a: number) => a
+        expect(psi(f)(g)(a)(b)).toBe(f(g(a))(g(b)))
       })
     ))
 })

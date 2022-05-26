@@ -24,3 +24,12 @@ export const cardinal: <A, B, C>(
  */
 export const applicator: <A, B>(f: (a: A) => B) => (a: A) => B = (f) => (a) =>
   f(a)
+
+/**
+ * Psi combinator - psi bird (?)
+ * `on` in Haskell
+ */
+export const psi: <B, C>(
+  f: (b: B) => (a: B) => C
+) => <A>(g: (a: A) => B) => (a: A) => (a: A) => C = (f) => (g) => (a) => (b) =>
+  f(g(a))(g(b))
