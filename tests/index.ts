@@ -1,14 +1,16 @@
-import { idiot, kestrel, cardinal, applicator, psi } from '../src'
+import * as Birds from '../src'
 import * as fc from 'fast-check'
 
 describe('birds', () => {
   it('idiot bird', () =>
-    fc.assert(fc.property(fc.anything(), (a) => expect(idiot(a)).toBe(a))))
+    fc.assert(
+      fc.property(fc.anything(), (a) => expect(Birds.idiot(a)).toBe(a))
+    ))
 
   it('kestrel bird', () =>
     fc.assert(
       fc.property(fc.anything(), fc.anything(), (a, b) =>
-        expect(kestrel(a)(b)).toBe(a)
+        expect(Birds.kestrel(a)(b)).toBe(a)
       )
     ))
 
@@ -16,7 +18,7 @@ describe('birds', () => {
     fc.assert(
       fc.property(fc.nat(), fc.nat(), (a, b) => {
         const f = (a: number) => (b: number) => a + b
-        expect(cardinal(f)(a)(b)).toBe(f(b)(a))
+        expect(Birds.cardinal(f)(a)(b)).toBe(f(b)(a))
       })
     ))
 
@@ -24,7 +26,7 @@ describe('birds', () => {
     fc.assert(
       fc.property(fc.nat(), (a) => {
         const f = (b: number) => `${b}`
-        expect(applicator(f)(a)).toBe(f(a))
+        expect(Birds.applicator(f)(a)).toBe(f(a))
       })
     ))
 
@@ -33,7 +35,17 @@ describe('birds', () => {
       fc.property(fc.nat(), fc.nat(), (a, b) => {
         const f = (a: number) => (b: number) => a + b
         const g = (a: number) => a
-        expect(psi(f)(g)(a)(b)).toBe(f(g(a))(g(b)))
+        expect(Birds.psi(f)(g)(a)(b)).toBe(f(g(a))(g(b)))
+      })
+    ))
+
+  it('becard bird', () =>
+    fc.assert(
+      fc.property(fc.nat(), (a) => {
+        const f = (a: number) => a - 2
+        const g = (a: number) => a + 2
+        const h = (a: number) => a * 2
+        expect(Birds.becard(f)(g)(h)(a)).toBe(f(g(h(a))))
       })
     ))
 })
