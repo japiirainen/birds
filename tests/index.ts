@@ -75,4 +75,13 @@ describe('birds', () => {
         expect(Birds.bluebirdp(f)(a)(g)(b)).toBe(f(a)(g(b)))
       })
     ))
+
+  it("bunting bird'", () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), fc.nat(), (a, b, c) => {
+        const f = (d: number) => d * 2
+        const g = (a: number) => (b: number) => (c: number) => a * b * c
+        expect(Birds.bunting(f)(g)(a)(b)(c)).toBe(f(g(a)(b)(c)))
+      })
+    ))
 })

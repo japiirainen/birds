@@ -71,3 +71,14 @@ export const bluebirdp: <A, C, D>(
   f: (a: A) => (c: C) => D
 ) => (a: A) => <B>(g: (b: B) => C) => (b: B) => D = (f) => (a) => (g) => (b) =>
   f(a)(g(b))
+
+/**
+ * @signature bunting :: (d -> e) -> (a -> b -> c -> d) -> a -> b -> c -> e
+ * B2 combinator - binting bird'
+ */
+export const bunting: <D, E>(
+  f: (d: D) => E
+) => <A, B, C>(
+  g: (a: A) => (b: B) => (c: C) => D
+) => (a: A) => (b: B) => (c: C) => E = (f) => (g) => (a) => (b) => (c) =>
+  f(g(a)(b)(c))
