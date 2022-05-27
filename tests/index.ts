@@ -84,4 +84,13 @@ describe('birds', () => {
         expect(Birds.bunting(f)(g)(a)(b)(c)).toBe(f(g(a)(b)(c)))
       })
     ))
+
+  it("cardinal' bird'", () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), (a, b) => {
+        const f = (c: number) => (a: number) => c * a
+        const g = (b: number) => b * 2
+        expect(Birds.cardinalp(f)(g)(a)(b)).toBe(f(g(b))(a))
+      })
+    ))
 })

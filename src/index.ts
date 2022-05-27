@@ -82,3 +82,12 @@ export const bunting: <D, E>(
   g: (a: A) => (b: B) => (c: C) => D
 ) => (a: A) => (b: B) => (c: C) => E = (f) => (g) => (a) => (b) => (c) =>
   f(g(a)(b)(c))
+
+/**
+ * @signature cardinal' :: (c -> a -> d) -> (b -> c) -> a -> b -> d
+ * B2 combinator - binting bird'
+ */
+export const cardinalp: <C, A, D>(
+  f: (c: C) => (a: A) => D
+) => <B>(g: (b: B) => C) => (a: A) => (b: B) => D = (f) => (g) => (a) => (b) =>
+  f(g(b))(a)
