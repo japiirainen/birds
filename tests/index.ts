@@ -14,6 +14,15 @@ describe('birds', () => {
       )
     ))
 
+  it('bluebird', () =>
+    fc.assert(
+      fc.property(fc.nat(), (a) => {
+        const f = (a: number) => a + 1
+        const g = (a: number) => a * 2
+        expect(Birds.bluebird(f)(g)(a)).toBe(f(g(a)))
+      })
+    ))
+
   it('cardinal bird', () =>
     fc.assert(
       fc.property(fc.nat(), fc.nat(), (a, b) => {
@@ -46,6 +55,24 @@ describe('birds', () => {
         const g = (a: number) => a + 2
         const h = (a: number) => a * 2
         expect(Birds.becard(f)(g)(h)(a)).toBe(f(g(h(a))))
+      })
+    ))
+
+  it('blackbird', () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), (a, b) => {
+        const f = (a: number) => a * 2
+        const g = (a: number) => (b: number) => a * b
+        expect(Birds.blackbird(f)(g)(a)(b)).toBe(f(g(a)(b)))
+      })
+    ))
+
+  it("bluebird'", () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), (a, b) => {
+        const f = (a: number) => (b: number) => a * b
+        const g = (a: number) => a * 2
+        expect(Birds.bluebirdp(f)(a)(g)(b)).toBe(f(a)(g(b)))
       })
     ))
 })
