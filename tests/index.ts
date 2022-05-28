@@ -76,7 +76,7 @@ describe('birds', () => {
       })
     ))
 
-  it("bunting bird'", () =>
+  it('bunting bird', () =>
     fc.assert(
       fc.property(fc.nat(), fc.nat(), fc.nat(), (a, b, c) => {
         const f = (d: number) => d * 2
@@ -85,7 +85,7 @@ describe('birds', () => {
       })
     ))
 
-  it("cardinal' bird'", () =>
+  it("cardinal' bird", () =>
     fc.assert(
       fc.property(fc.nat(), fc.nat(), (a, b) => {
         const f = (c: number) => (a: number) => c * a
@@ -94,7 +94,7 @@ describe('birds', () => {
       })
     ))
 
-  it("cardinalstar bird'", () =>
+  it('cardinalstar bird', () =>
     fc.assert(
       fc.property(fc.nat(), fc.nat(), fc.nat(), (a, b, c) => {
         const f = (a: number) => (c: number) => (b: number) => c * a * b
@@ -102,12 +102,21 @@ describe('birds', () => {
       })
     ))
 
-  it("cardinalstarstar bird'", () =>
+  it('cardinalstarstar bird', () =>
     fc.assert(
       fc.property(fc.nat(), fc.nat(), fc.nat(), fc.nat(), (a, b, c, d) => {
         const f = (a: number) => (b: number) => (d: number) => (c: number) =>
           c * a * b * d
         expect(Birds.cardinalstarstar(f)(a)(b)(c)(d)).toBe(f(a)(b)(d)(c))
+      })
+    ))
+
+  it('dickcissel', () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), fc.nat(), fc.nat(), (a, b, c) => {
+        const f = (a: number) => (b: number) => (d: number) => a * b * d
+        const g = (c: number) => c * 10
+        expect(Birds.dickcissel(f)(a)(b)(g)(c)).toBe(f(a)(b)(g(c)))
       })
     ))
 })

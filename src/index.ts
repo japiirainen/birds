@@ -109,3 +109,13 @@ export const cardinalstarstar: <A, B, C, D, E>(
 ) => (a: A) => (b: B) => (c: C) => (d: D) => E =
   (f) => (a) => (b) => (c) => (d) =>
     f(a)(b)(d)(c)
+
+/**
+ * @signature dickcissel :: (a -> b -> d -> e) -> a -> b -> (c -> d) -> c -> e
+ * D1 combinator - dickcissel
+ */
+export const dickcissel: <A, B, D, E>(
+  f: (a: A) => (b: B) => (d: D) => E
+) => (a: A) => (b: B) => <C>(g: (c: C) => D) => (c: C) => E =
+  (f) => (a) => (b) => (g) => (c) =>
+    f(a)(b)(g(c))
