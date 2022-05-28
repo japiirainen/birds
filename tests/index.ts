@@ -119,4 +119,13 @@ describe('birds', () => {
         expect(Birds.dickcissel(f)(a)(b)(g)(c)).toBe(f(a)(b)(g(c)))
       })
     ))
+
+  it('dove', () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), (a, b) => {
+        const f = (a: number) => (c: number) => a * c
+        const g = (b: number) => b * 10
+        expect(Birds.dove(f)(a)(g)(b)).toBe(f(a)(g(b)))
+      })
+    ))
 })

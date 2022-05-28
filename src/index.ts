@@ -119,3 +119,12 @@ export const dickcissel: <A, B, D, E>(
 ) => (a: A) => (b: B) => <C>(g: (c: C) => D) => (c: C) => E =
   (f) => (a) => (b) => (g) => (c) =>
     f(a)(b)(g(c))
+
+/**
+ * @signature dove :: (a -> c -> d) -> a -> (b -> c) -> b -> d
+ * D combinator - dove
+ */
+export const dove: <A, C, D>(
+  f: (a: A) => (c: C) => D
+) => (a: A) => <B>(g: (b: B) => C) => (b: B) => D = (f) => (a) => (g) => (b) =>
+  f(a)(g(b))
