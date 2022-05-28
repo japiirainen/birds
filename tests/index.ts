@@ -101,4 +101,13 @@ describe('birds', () => {
         expect(Birds.cardinalstar(f)(a)(b)(c)).toBe(f(a)(c)(b))
       })
     ))
+
+  it("cardinalstarstar bird'", () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), fc.nat(), fc.nat(), (a, b, c, d) => {
+        const f = (a: number) => (b: number) => (d: number) => (c: number) =>
+          c * a * b * d
+        expect(Birds.cardinalstarstar(f)(a)(b)(c)(d)).toBe(f(a)(b)(d)(c))
+      })
+    ))
 })

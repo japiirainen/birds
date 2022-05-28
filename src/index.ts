@@ -85,7 +85,7 @@ export const bunting: <D, E>(
 
 /**
  * @signature cardinal' :: (c -> a -> d) -> (b -> c) -> a -> b -> d
- * C' combinator - binting bird'
+ * C' combinator - no name
  */
 export const cardinalp: <C, A, D>(
   f: (c: C) => (a: A) => D
@@ -94,8 +94,18 @@ export const cardinalp: <C, A, D>(
 
 /**
  * @signature cardinalstar :: (a -> c -> b -> d) -> a -> b -> c -> d
- * c* combinator - binting bird'
+ * c* combinator - cardinal once removed
  */
 export const cardinalstar: <A, C, B, D>(
   f: (a: A) => (c: C) => (b: B) => D
 ) => (a: A) => (b: B) => (c: C) => D = (f) => (a) => (b) => (c) => f(a)(c)(b)
+
+/**
+ * @signature cardinalstarstar :: (a -> b -> d -> c -> e) -> a -> b -> c -> d -> e
+ * c* combinator - cardinal twice removed
+ */
+export const cardinalstarstar: <A, B, C, D, E>(
+  f: (a: A) => (b: B) => (d: D) => (c: C) => E
+) => (a: A) => (b: B) => (c: C) => (d: D) => E =
+  (f) => (a) => (b) => (c) => (d) =>
+    f(a)(b)(d)(c)
