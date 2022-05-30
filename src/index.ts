@@ -128,3 +128,13 @@ export const dove: <A, C, D>(
   f: (a: A) => (c: C) => D
 ) => (a: A) => <B>(g: (b: B) => C) => (b: B) => D = (f) => (a) => (g) => (b) =>
   f(a)(g(b))
+
+/**
+ * @signature dovekie :: (c -> d -> e) -> (a -> c) -> a -> (b -> d) -> b -> e
+ * D2 combinator - dovekie
+ */
+export const dovekie: <C, D, E>(
+  f: (c: C) => (d: D) => E
+) => <A>(g: (a: A) => C) => (a: A) => <B>(h: (b: B) => D) => (b: B) => E =
+  (f) => (g) => (a) => (h) => (b) =>
+    f(g(a))(h(b))
