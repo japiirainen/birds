@@ -138,3 +138,13 @@ export const dovekie: <C, D, E>(
 ) => <A>(g: (a: A) => C) => (a: A) => <B>(h: (b: B) => D) => (b: B) => E =
   (f) => (g) => (a) => (h) => (b) =>
     f(g(a))(h(b))
+
+/**
+ * @signature eagle :: (a -> d -> e) -> a -> (b -> c -> d) -> b -> c -> e
+ * E combinator - eagle
+ */
+export const eagle: <A, D, E>(
+  f: (a: A) => (d: D) => E
+) => (a: A) => <B, C>(g: (b: B) => (c: C) => D) => (b: B) => (c: C) => E =
+  (f) => (a) => (g) => (b) => (c) =>
+    f(a)(g(b)(c))
