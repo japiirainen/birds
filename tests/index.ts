@@ -147,4 +147,14 @@ describe('birds', () => {
         expect(Birds.eagle(f)(a)(g)(b)(c)).toBe(f(a)(g(b)(c)))
       })
     ))
+
+  it('eaglebald', () =>
+    fc.assert(
+      fc.property(fc.nat(), fc.nat(), fc.nat(), fc.nat(), (s, t, u, v) => {
+        const f = (e: number) => (f: number) => e * f
+        const g = (a: number) => (b: number) => a - b
+        const h = (c: number) => (d: number) => c + d
+        expect(Birds.eagleBald(f)(g)(s)(t)(h)(u)(v)).toBe(f(g(s)(t))(h(u)(v)))
+      })
+    ))
 })

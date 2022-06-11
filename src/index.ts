@@ -148,3 +148,21 @@ export const eagle: <A, D, E>(
 ) => (a: A) => <B, C>(g: (b: B) => (c: C) => D) => (b: B) => (c: C) => E =
   (f) => (a) => (g) => (b) => (c) =>
     f(a)(g(b)(c))
+
+/**
+ * @signature eaglebald :: (e -> f -> g)
+                        -> (a -> b -> e)
+                        -> a -> b
+                        -> (c -> d -> f)
+                        -> c -> d -> g
+   * E ^ combinator - bald eagle.
+ */
+export const eagleBald: <E, F, G>(
+  f: (e: E) => (f: F) => G
+) => <A, B>(
+  g: (a: A) => (b: B) => E
+) => (
+  a: A
+) => (b: B) => <C, D>(h: (c: C) => (d: D) => F) => (c: C) => (d: D) => G =
+  (f) => (g) => (s) => (t) => (h) => (u) => (v) =>
+    f(g(s)(t))(h(u)(v))
